@@ -1,0 +1,70 @@
+apiVersion: eksctl.io/v1alpha5
+kind: ClusterConfig
+metadata:
+  name: px-eksctl
+  region: us-east-1
+  version: "1.14"
+managedNodeGroups:
+  - name: storage-nodes
+    # recomended m4.xlarge
+    instanceType: t2.medium 
+    minSize: 3
+    maxSize: 3
+    volumeSize: 20
+    #ami: auto
+    amiFamily: AmazonLinux2
+    labels: {role: worker, "px/node-type": "storage"}
+    tags:
+      nodegroup-role: worker
+    ssh:  
+      allow: true # will use ~/.ssh/id_rsa.pub as the default ssh key if "publicKeyPath" not specified
+      publicKeyPath: ~/.ssh/aws-vm.pub
+    #privateNetworking: false
+    iam:
+      attachPolicyARNs:
+        - arn:aws:iam::aws:policy/AmazonEKSWorkerNodePolicy
+        - arn:aws:iam::aws:policy/AmazonEKS_CNI_Policy
+        - arn:aws:iam::aws:policy/AmazonEC2ContainerRegistryReadOnly
+        - arn:aws:iam::aws:policy/ElasticLoadBalancingFullAccess
+        - arn:aws:iam::649513742363:policy/portworx
+        - arn:aws:iam::649513742363:policy/portworx-eks-policy
+      withAddonPolicies:
+        imageBuilder: true
+        autoScaler: true
+        ebs: true
+        fsx: true
+        efs: true
+        albIngress: true
+        cloudWatch: true
+  - name: storageless-nodes
+    # recomended m4.xlarge
+    instanceType: t2.medium 
+    minSize: 3
+    maxSize: 6
+    desiredCapacity: 4
+    volumeSize: 20
+    #ami: auto
+    amiFamily: AmazonLinux2
+    labels: {role: worker}
+    tags:
+      nodegroup-role: worker-storageless
+    ssh:
+      allow: true # will use ~/.ssh/id_rsa.pub as the default ssh key if "publicKeyPath" not specified
+    #privateNetworking: false
+    iam:
+      attachPolicyARNs:
+        - arn:aws:iam::aws:policy/AmazonEKSWorkerNodePolicy
+        - arn:aws:iam::aws:policy/AmazonEKS_CNI_Policy
+        - arn:aws:iam::aws:policy/AmazonEC2ContainerRegistryReadOnly
+        - arn:aws:iam::aws:policy/ElasticLoadBalancingFullAccess
+        - arn:aws:iam::649513742363:policy/portworx
+        - arn:aws:iam::649513742363:policy/portworx-eks-policy
+      withAddonPolicies:
+        imageBuilder: true
+        autoScaler: true
+        ebs: true
+        fsx: true
+        efs: true
+        albIngress: true
+        cloudWatch: true
+availabilityZones: [ 'us-east-1a', 'us-east-1b', 'us-east-1c' ]
