@@ -13,7 +13,7 @@ managedNodeGroups:
     volumeSize: 20
     #ami: auto
     amiFamily: AmazonLinux2
-    labels: {role: worker, "px/node-type": "storage"}
+    labels: {role: worker, "portworx.io/node-type": "storage"}
     tags:
       nodegroup-role: worker
     ssh:  
