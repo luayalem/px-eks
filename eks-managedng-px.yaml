@@ -26,8 +26,7 @@ managedNodeGroups:
         - arn:aws:iam::aws:policy/AmazonEKS_CNI_Policy
         - arn:aws:iam::aws:policy/AmazonEC2ContainerRegistryReadOnly
         - arn:aws:iam::aws:policy/ElasticLoadBalancingFullAccess
-        - arn:aws:iam::649513742363:policy/portworx
-        - arn:aws:iam::649513742363:policy/portworx-eks-policy
+        - arn:aws:iam::aws:<Policy-Name-to-allow-PX-creates-attaches-EBS-volumes>
       withAddonPolicies:
         imageBuilder: true
         autoScaler: true
@@ -57,8 +56,7 @@ managedNodeGroups:
         - arn:aws:iam::aws:policy/AmazonEKS_CNI_Policy
         - arn:aws:iam::aws:policy/AmazonEC2ContainerRegistryReadOnly
         - arn:aws:iam::aws:policy/ElasticLoadBalancingFullAccess
-        - arn:aws:iam::649513742363:policy/portworx
-        - arn:aws:iam::649513742363:policy/portworx-eks-policy
+        - arn:aws:iam::<Policy-Name-to-allow-PX-creates-attaches-EBS-volumes>
       withAddonPolicies:
         imageBuilder: true
         autoScaler: true
