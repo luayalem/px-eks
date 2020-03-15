@@ -12,7 +12,7 @@ managedNodeGroups:
     desiredCapacity: 3
     #ami: auto
     amiFamily: AmazonLinux2
-    labels: {role: worker, "px/metadata-node": "true", "px/node-type": "storage"}
+    labels: {role: worker, "portworx.io/metadata-node": "true", "portworx.io/node-type": "storage"}
     tags:
       nodegroup-role: worker-kvdbNode
     ssh:
@@ -25,8 +25,7 @@ managedNodeGroups:
         - arn:aws:iam::aws:policy/AmazonEKS_CNI_Policy
         - arn:aws:iam::aws:policy/ElasticLoadBalancingFullAccess
         - arn:aws:iam::aws:policy/AmazonEC2ContainerRegistryReadOnly
-        - arn:aws:iam::649513742363:policy/portworx
-        - arn:aws:iam::649513742363:policy/portworx-eks-policy
+        - arn:aws:iam::aws:<Policy-Name-to-allow-PX-creates-attaches-EBS-volumes>
       withAddonPolicies:
         imageBuilder: true
         autoScaler: true
@@ -42,7 +41,7 @@ managedNodeGroups:
     desiredCapacity: 6
     #ami: auto
     amiFamily: AmazonLinux2
-    labels: {role: worker, "px/node-type": "storage"}
+    labels: {role: worker, "portworx.io/node-type": "storage"}
     tags:
       nodegroup-role: worker-storage
     ssh:
@@ -55,8 +54,7 @@ managedNodeGroups:
         - arn:aws:iam::aws:policy/AmazonEKS_CNI_Policy
         - arn:aws:iam::aws:policy/ElasticLoadBalancingFullAccess
         - arn:aws:iam::aws:policy/AmazonEC2ContainerRegistryReadOnly
-        - arn:aws:iam::649513742363:policy/portworx
-        - arn:aws:iam::649513742363:policy/portworx-eks-policy
+        - arn:aws:iam::aws:<Policy-Name-to-allow-PX-creates-attaches-EBS-volumes>
       withAddonPolicies:
         imageBuilder: true
         autoScaler: true
@@ -85,8 +83,7 @@ managedNodeGroups:
         - arn:aws:iam::aws:policy/AmazonEKS_CNI_Policy
         - arn:aws:iam::aws:policy/ElasticLoadBalancingFullAccess
         - arn:aws:iam::aws:policy/AmazonEC2ContainerRegistryReadOnly
-        - arn:aws:iam::649513742363:policy/portworx
-        - arn:aws:iam::649513742363:policy/portworx-eks-policy
+        - arn:aws:iam::aws:<Policy-Name-to-allow-PX-creates-attaches-EBS-volumes>
       withAddonPolicies:
         imageBuilder: true
         autoScaler: true
